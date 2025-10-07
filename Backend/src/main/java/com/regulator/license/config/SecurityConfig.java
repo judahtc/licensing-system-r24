@@ -29,8 +29,7 @@ public class SecurityConfig {
             .and()
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/licenses/reports/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             );
         
         return http.build();
