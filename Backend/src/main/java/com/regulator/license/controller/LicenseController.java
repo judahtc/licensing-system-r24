@@ -41,14 +41,12 @@ public class LicenseController {
     }
     
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<LicenseDTO> createLicense(@Valid @RequestBody LicenseDTO licenseDTO) {
         LicenseDTO createdLicense = licenseService.createLicense(licenseDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdLicense);
     }
     
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<LicenseDTO> updateLicense(@PathVariable Long id, @Valid @RequestBody LicenseDTO licenseDTO) {
         return licenseService.updateLicense(id, licenseDTO)
                 .map(license -> ResponseEntity.ok(license))
@@ -56,7 +54,6 @@ public class LicenseController {
     }
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteLicense(@PathVariable Long id) {
         if (licenseService.deleteLicense(id)) {
             return ResponseEntity.noContent().build();
@@ -71,7 +68,6 @@ public class LicenseController {
     }
     
     @PutMapping("/{id}/adjust-fee")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> adjustApplicationFee(@PathVariable Long id, @RequestBody Map<String, Double> request) {
         Double percentage = request.get("percentage");
         if (percentage != null) {
