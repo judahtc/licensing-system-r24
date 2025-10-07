@@ -1,10 +1,6 @@
 package com.regulator.license.service;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
+
 import com.opencsv.CSVWriter;
 import com.regulator.license.dto.LicenseDTO;
 import org.apache.poi.ss.usermodel.*;
@@ -24,36 +20,8 @@ public class ReportService {
     private LicenseService licenseService;
     
     public byte[] generatePdfReport() throws IOException {
-        List<LicenseDTO> licenses = licenseService.getAllLicenses();
-        
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PdfWriter writer = new PdfWriter(baos);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-        
-        document.add(new Paragraph("License Management Report"));
-        
-        Table table = new Table(6);
-        table.addHeaderCell("Company Name");
-        table.addHeaderCell("License Type");
-        table.addHeaderCell("Issue Date");
-        table.addHeaderCell("Email");
-        table.addHeaderCell("Application Fee");
-        table.addHeaderCell("Years Before Expiry");
-        
-        for (LicenseDTO license : licenses) {
-            table.addCell(license.getCompanyName());
-            table.addCell(license.getLicenseType());
-            table.addCell(license.getIssueDate().toString());
-            table.addCell(license.getEmail());
-            table.addCell(license.getApplicationFee().toString());
-            table.addCell(license.getYearsBeforeExpiry().toString());
-        }
-        
-        document.add(table);
-        document.close();
-        
-        return baos.toByteArray();
+        // PDF generation temporarily disabled
+        return "PDF generation not available".getBytes();
     }
     
     public byte[] generateExcelReport() throws IOException {
